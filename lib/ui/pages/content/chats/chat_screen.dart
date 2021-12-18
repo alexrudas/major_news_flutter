@@ -50,9 +50,14 @@ class _State extends State<UserMessages> {
                   message: chat.lastMessage.message,
                   time: '',
                   onTap: () {
-                    Get.to(
-                      () => ChatPage(chat: chat),
-                    );
+                    print('${chat.userA}');
+                    print('${chat.userB}');
+                    // Get.to(
+                    //   () => ChatPage(
+                    //       chat: chat,
+                    //       localUser: chat.userA,
+                    //       remoteUser: chat.userB),
+                    // );
                   },
                 );
               },

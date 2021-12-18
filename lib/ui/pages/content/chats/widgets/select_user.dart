@@ -38,7 +38,7 @@ class _State extends State<SelectUser> {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.data == null) {
-                return Text('No hay usuarios');
+                return Center(child: Text('No hay usuarios'));
               } else {
                 users = snapshot.data as List<UserModel>;
                 DateFormat format = DateFormat('MMMM-dd-yyyy / hh:mm a');

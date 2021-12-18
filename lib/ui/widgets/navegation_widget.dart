@@ -2,6 +2,7 @@ import 'package:app_majpr_new/domain/use_case/controller_use_case/authentication
 import 'package:app_majpr_new/domain/use_case/theme_manager.dart';
 import 'package:app_majpr_new/ui/pages/authentication/user_update/user_update.dart';
 import 'package:app_majpr_new/ui/pages/chat/chat_page.dart';
+import 'package:app_majpr_new/ui/pages/content/chats/chat_screen.dart';
 import 'package:app_majpr_new/ui/pages/content/location/location_screen.dart';
 import 'package:app_majpr_new/ui/pages/content/publication/publication_page.dart';
 import 'package:app_majpr_new/ui/pages/content/state_page/state_screen.dart';
@@ -33,7 +34,7 @@ class _NavegatioWidgetnState extends State<NavegatioWidgetn> {
     StateScreen(),
     PublicationPage(),
     LocationScreen(),
-    ChatPage(),
+    UserMessages(),
   ];
 
   @override

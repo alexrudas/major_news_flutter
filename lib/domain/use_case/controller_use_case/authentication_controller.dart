@@ -24,9 +24,11 @@ class AuthenticationController extends GetxController {
   }
 
   Future<List<UserModel>> extractAllUser() async {
+    print('extractAllUser');
     try {
       return await authManagement.extractAllUsers();
     } catch (e) {
+      print('extractAllUser error ' + e.toString());
       return Future.error(e);
     }
   }

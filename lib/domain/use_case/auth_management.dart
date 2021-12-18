@@ -3,7 +3,7 @@ import 'package:app_majpr_new/domain/models/user_model.dart';
 import 'package:app_majpr_new/domain/services_domain/authentication_service.dart';
 import 'package:get/get.dart';
 
-class AuthManagement extends GetxController {
+class AuthManagement {
   PasswordAuth get auth => PasswordAuth();
 
   Future<UserModel?> getLoggedUser() async {
@@ -24,6 +24,7 @@ class AuthManagement extends GetxController {
       List<UserModel> users = [];
       FirestoreDatabase database = Get.find();
       var doc = await database.readCollection(collectionPath: 'users');
+      print('extractAllUsers ' + doc.length.toString());
       for (var user in doc) {
         users.add(UserModel.fromMap(user['data']));
       }

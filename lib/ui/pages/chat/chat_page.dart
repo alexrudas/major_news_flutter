@@ -26,7 +26,7 @@ class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserModel? currentUser = controller.userActive;
-
+    print('ChatPage $localUser $remoteUser');
     return Scaffold(
       body: SafeArea(
         child: AnimatedSwitcher(
