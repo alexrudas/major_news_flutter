@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "684018675208",
+    "project_id": "majornews-3afef",
+    "storage_bucket": "majornews-3afef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:684018675208:android:288e9f91eb7422f12cebbd",
+        "android_client_info": {
+          "package_name": "com.example.app_majpr_new"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "684018675208-g1nf93rj8bih0rtd3jdmscbargaa9sds.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4e_F-0qD25Z5gZx5omB95cMaS2gzuExc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "684018675208-g1nf93rj8bih0rtd3jdmscbargaa9sds.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
