@@ -2,6 +2,7 @@ import 'package:app_majpr_new/data/repositories_data/chat_repo_data/firestore_da
 import 'package:app_majpr_new/data/repositories_data/chat_repo_data/realtime_database.dart';
 import 'package:app_majpr_new/domain/models/chat_model.dart';
 import 'package:app_majpr_new/domain/models/message.dart';
+import 'package:app_majpr_new/domain/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 
@@ -15,10 +16,17 @@ class ChatManager {
     return firestore.getChatRecords(localEmail);
   }
 
-  Future<ChatModel?> checkIfChatExist(String emailA, String emailB) async {
-    print("hola");
+  Future<ChatModel?> checkIfChatExist(
+      String emailA, String emailB, UserModel local, UserModel remote) async {
+    print("ChatManager checkIfChatExist");
     final chat = await firestore.checkIfRecordExist(emailA, emailB);
-    return chat != null ? ChatModel.fromJson(chat) : null;
+    return chat != null
+        ? ChatModel.fromJson(chat)
+        : ChatModel(
+            userA: local,
+            userB: remote,
+            lastMessage: ChatMessage(message: '', sender: ''),
+          );
   }
 
   Future<String> createChat(ChatModel chat) async {

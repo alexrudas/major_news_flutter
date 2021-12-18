@@ -26,7 +26,8 @@ class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserModel? currentUser = controller.userActive;
-    print('ChatPage $localUser $remoteUser');
+    print(
+        'ChatPage ${currentUser!.email.toString()} ${remoteUser!.email.toString()}');
     return Scaffold(
       body: SafeArea(
         child: AnimatedSwitcher(
@@ -64,7 +65,7 @@ class ChatPage extends StatelessWidget {
               }
 
               // By default, show a loading spinner.
-              return const Center(child: CircularProgressIndicator());
+              return const Center(child: Text('spining'));
             },
           ),
         ),
@@ -77,8 +78,8 @@ class ChatPage extends StatelessWidget {
     if (chat != null) {
       currentChat = chat!;
     } else {
-      ChatModel? retrievedChat =
-          await manager.checkIfChatExist(localUser!.email, remoteUser!.email);
+      ChatModel? retrievedChat = await manager.checkIfChatExist(
+          localUser!.email, remoteUser!.email, localUser!, remoteUser!);
       currentChat = retrievedChat ??
           ChatModel(
             userA: localUser!,

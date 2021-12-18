@@ -27,6 +27,7 @@ class FirestoreChat extends FirestoreDatabase {
         .where('users.${emailB.replaceAll('.', '')}', isEqualTo: true)
         .get();
     final docs = super.extractDocs(snapshot);
+    print('checkIfRecordExist ${docs.length}');
     return docs.isNotEmpty ? docs.first : null;
   }
 

@@ -88,7 +88,7 @@ class _State extends State<ChatView> {
                 }
 
                 // By default, show a loading spinner.
-                return const Center(child: CircularProgressIndicator());
+                return const Center(child: Text('ChatView spinnig'));
               },
             ),
           ),

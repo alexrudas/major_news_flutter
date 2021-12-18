@@ -22,7 +22,7 @@ class AuthManagement {
   Future<List<UserModel>> extractAllUsers() async {
     try {
       List<UserModel> users = [];
-      FirestoreDatabase database = Get.find();
+      FirestoreDatabase database = FirestoreDatabase();
       var doc = await database.readCollection(collectionPath: 'users');
       print('extractAllUsers ' + doc.length.toString());
       for (var user in doc) {
@@ -30,6 +30,7 @@ class AuthManagement {
       }
       return users;
     } catch (e) {
+      print('AuthManagement extractAllUsers error');
       return Future.error(e);
     }
   }
