@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PublicationWidget extends StatelessWidget {
-  String section;
   String date;
   String title;
   String message;
@@ -11,8 +10,7 @@ class PublicationWidget extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
   PublicationWidget(
-      {required this.section,
-      required this.date,
+      {required this.date,
       required this.title,
       required this.message,
       required this.userName,
@@ -94,10 +92,6 @@ class PublicationWidget extends StatelessWidget {
         ]),
       ),
       subtitle: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text(
-          section,
-          style: TextStyle(fontSize: 15),
-        ),
         Text(
           date,
           style: TextStyle(

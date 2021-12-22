@@ -42,8 +42,10 @@ class StateController extends GetxController {
         .where((stateModel) =>
             stateModel.uid == authenticationController.userActive!.id)
         .toList();
-    _lastState.value = myState[myState.length - 1].message;
-    _lastDate.value = myState[myState.length - 1].date;
+    if (myState.isNotEmpty) {
+      _lastState.value = myState[myState.length - 1].message;
+      _lastDate.value = myState[myState.length - 1].date;
+    }
   }
 
   guardarEstado(String miEstado, String fecha) {

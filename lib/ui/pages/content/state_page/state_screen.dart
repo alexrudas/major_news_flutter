@@ -128,7 +128,6 @@ class StateScreen extends StatelessWidget {
           Obx(
             // se hace observable para que cada vez que haya un nuevo estdo lo agregue a la card
             () => Card(
-              elevation: 8,
               child: CardMyStateWidget(
                 userName: authController.userActive!.userName,
                 message: controller.lastState,

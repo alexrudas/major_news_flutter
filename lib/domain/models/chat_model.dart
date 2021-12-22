@@ -15,6 +15,7 @@ class ChatModel {
     this.recordReference,
   });
 
+// Muestra aas tarjetas de los diferentes usurios en la  vista del chat
   UserModel getTargetUser(String email) {
     if (userA.email != email) {
       return userA;
@@ -30,7 +31,7 @@ class ChatModel {
       userB: UserModel.fromMap(data['userB']),
       lastMessage: ChatMessage.fromJson(data['lastMessage']),
       reference: data['reference'],
-      recordReference: map['ref'],
+      recordReference: data['ref'],
     );
   }
 

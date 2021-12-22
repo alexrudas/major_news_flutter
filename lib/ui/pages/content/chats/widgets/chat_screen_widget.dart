@@ -1,7 +1,7 @@
 import 'package:app_majpr_new/domain/models/message.dart';
 import 'package:app_majpr_new/domain/use_case/controller_use_case/chat_management.dart';
-import 'package:app_majpr_new/ui/pages/chat/widgets/message.dart';
-import 'package:app_majpr_new/ui/pages/chat/widgets/option.dart';
+import 'package:app_majpr_new/ui/pages/content/chats/widgets/message_widget.dart';
+import 'package:app_majpr_new/ui/pages/content/chats/widgets/delete_message.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -60,7 +60,7 @@ class _State extends State<ChatView> {
                     itemBuilder: (context, index) {
                       ChatMessage message = items[index];
                       return MessageBubble(
-                        remote: message.sender != widget.localEmail,
+                        remote: message.sender == widget.localEmail,
                         message: message.message,
                         time: message.timestamp!,
                         onHold: () {
@@ -101,6 +101,7 @@ class _State extends State<ChatView> {
             child: Row(
               children: [
                 Expanded(
+                  // Cuadro de texto para envíar mensaje por chat
                   child: TextField(
                     keyboardType: TextInputType.multiline,
                     controller: messageController,

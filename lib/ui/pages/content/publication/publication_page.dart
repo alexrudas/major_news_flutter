@@ -1,14 +1,12 @@
 import 'package:app_majpr_new/domain/use_case/controller_use_case/authentication_controller.dart';
 import 'package:app_majpr_new/domain/use_case/controller_use_case/publication_controller.dart';
 import 'package:app_majpr_new/ui/pages/content/publication/widget_publication/publication_widget.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 final _formKey = GlobalKey<FormState>();
 // Contrlan los textos ingresados
-final TextEditingController textcontrollersection = TextEditingController();
 final TextEditingController textcontrollertitle = TextEditingController();
 final TextEditingController textcontrollermessage = TextEditingController();
 final TextEditingController textcontrollerusername = TextEditingController();
@@ -19,7 +17,7 @@ class PublicationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // PublicationController controller = Get.find();
-    // AuthenticationController authController = Get.find();
+    AuthenticationController authController = Get.find();
     final media = MediaQuery.of(context).size;
     // Stream<QuerySnapshot<Map<String, dynamic>>> statusesStream =
     //     controller.publicationManager.getpublicationStream();
@@ -58,23 +56,18 @@ class PublicationPage extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
                             Center(
-                              child: Text('Publicar tu noticia'),
+                              child: Text(
+                                'Publicar noticia',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.grey.shade700,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
                             Padding(
                               padding: EdgeInsets.all(8.0),
                               child: TextField(
-                                  controller: textcontrollersection,
-                                  decoration: InputDecoration(
-                                    hintText: 'Sección.Ej. Deportes',
-                                    labelStyle: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 17,
-                                        fontFamily: 'AvenirLight'),
-                                  )),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: TextField(
+                                maxLines: null,
                                 controller: textcontrollertitle,
                                 decoration: InputDecoration(
                                   hintText: 'Título de la noticia',
@@ -88,21 +81,10 @@ class PublicationPage extends StatelessWidget {
                             Padding(
                               padding: EdgeInsets.all(8.0),
                               child: TextField(
+                                  maxLines: null,
                                   controller: textcontrollermessage,
                                   decoration: InputDecoration(
                                     hintText: 'Contenido de la noticia',
-                                    labelStyle: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 17,
-                                        fontFamily: 'AvenirLight'),
-                                  )),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: TextField(
-                                  controller: textcontrollerusername,
-                                  decoration: InputDecoration(
-                                    hintText: 'Autor',
                                     labelStyle: TextStyle(
                                         color: Colors.black,
                                         fontSize: 17,
@@ -121,16 +103,15 @@ class PublicationPage extends StatelessWidget {
                                       PublicationController controller =
                                           Get.find();
                                       controller.addPublication(
-                                        uid: "id",
-                                        section: textcontrollersection.text,
+                                        uid: authController.userActive!.id,
                                         date: date,
                                         title: textcontrollertitle.text,
                                         message: textcontrollermessage.text,
-                                        userName: textcontrollerusername.text,
+                                        userName:
+                                            authController.userActive!.userName,
                                       );
                                       // Aquí vaciamos el formularaio del modal
                                       textcontrollertitle.text = "";
-                                      textcontrollersection.text = "";
                                       textcontrollertitle.text = "";
                                       textcontrollermessage.text = "";
                                       textcontrollerusername.text = "";
@@ -154,22 +135,6 @@ class PublicationPage extends StatelessWidget {
                 fontSize: 18,
               )),
         ),
-        // Container(
-        //   margin: EdgeInsets.only(top: 30),
-        //   child: ListView.builder(
-        //       itemCount: 1, // cuantas cards se van a mostrar
-        //       itemBuilder: (context, index) {
-        //         // Aquí itemBuilder actúa como un for
-        //         return Card(
-        //             child: PublicationWidget(
-        //           section: "Economía",
-        //           date: "11/12/2021",
-        //           title: "Reactivación económica",
-        //           userName: "Sander",
-        //           message: "Impulso a las ventas por el dá sin iva",
-        //         ));
-        //       }),
-        // ),
         GetX<PublicationController>(
             // cuerpo de la página Estado (en la App)
             builder: (controller) {
@@ -184,7 +149,6 @@ class PublicationPage extends StatelessWidget {
                   //Return Card importa de PublicationWidget la Card
                   return Card(
                       child: PublicationWidget(
-                    section: myPublication[index].section,
                     date: myPublication[index].date,
                     title: myPublication[index].title,
                     message: myPublication[index].message,

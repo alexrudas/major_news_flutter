@@ -2,8 +2,8 @@ import 'package:app_majpr_new/data/services_data/article_pool.dart';
 import 'package:app_majpr_new/domain/models/article_model.dart';
 import 'package:flutter/material.dart';
 
-class HomeWidget extends StatelessWidget {
-  const HomeWidget({Key? key}) : super(key: key);
+class HomeNews extends StatelessWidget {
+  const HomeNews({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

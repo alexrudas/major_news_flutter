@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class ChatCard extends StatelessWidget {
   final String pictureUrl, name, message;
@@ -38,9 +37,10 @@ class ChatCard extends StatelessWidget {
         ),
         title: Padding(
           padding: const EdgeInsets.only(bottom: 4.0),
+          // Tamaño del texto con el headline del textTheme
           child: Text(
             name,
-            style: Theme.of(context).textTheme.headline4,
+            style: Theme.of(context).textTheme.headline6,
           ),
         ),
         subtitle: Text(

@@ -1,12 +1,12 @@
 import 'package:app_majpr_new/domain/use_case/controller_use_case/authentication_controller.dart';
+import 'package:app_majpr_new/domain/use_case/controller_use_case/connectivity_controller.dart';
 import 'package:app_majpr_new/domain/use_case/theme_manager.dart';
 import 'package:app_majpr_new/ui/pages/authentication/user_update/user_update.dart';
-import 'package:app_majpr_new/ui/pages/chat/chat_page.dart';
-import 'package:app_majpr_new/ui/pages/content/chats/chat_screen.dart';
+import 'package:app_majpr_new/ui/pages/content/chats/chat_page.dart';
 import 'package:app_majpr_new/ui/pages/content/location/location_screen.dart';
 import 'package:app_majpr_new/ui/pages/content/publication/publication_page.dart';
 import 'package:app_majpr_new/ui/pages/content/state_page/state_screen.dart';
-import 'package:app_majpr_new/ui/pages/content/home/widget_home/home_widget.dart';
+import 'package:app_majpr_new/ui/pages/content/home/widget_home/home_news.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -29,18 +29,14 @@ class _NavegatioWidgetnState extends State<NavegatioWidgetn> {
     });
   }
 
-  static final List<Widget> _widgetOptions = <Widget>[
-    HomeWidget(),
-    StateScreen(),
-    PublicationPage(),
-    LocationScreen(),
-    UserMessages(),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    ConnectivityController connectivityController =
+        Get.find<ConnectivityController>();
     final AuthenticationController authenticationController = Get.find();
-    return Scaffold(
+    return DefaultTabController(
+      length: 5,
+      child: Scaffold(
         drawer: Drawer(
           child: Container(
             //color: Colors.indigo[400],
@@ -157,39 +153,68 @@ class _NavegatioWidgetnState extends State<NavegatioWidgetn> {
                 icon: Icon(
                     Icons.logout)), // se invoca el icono que se desea crear
           ],
+          // Botones del Tabbar
+          bottom: TabBar(
+            tabs: [
+              Tab(
+                icon: Icon(Icons.menu_book_rounded),
+              ),
+              Tab(
+                icon: Icon(Icons.group_outlined),
+              ),
+              Tab(
+                icon: Icon(Icons.access_time),
+              ),
+              Tab(
+                icon: Icon(Icons.place_outlined),
+              ),
+              Tab(
+                icon: Icon(Icons.chat_bubble),
+              ),
+            ],
+          ),
+          //title: Text('Major News'),
         ),
-        body: _widgetOptions.elementAt(_selectedIndex),
-        // ítems de la barra con los botones de navegacion
-        bottomNavigationBar: BottomNavigationBar(
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.menu_book_rounded,
-                  key: Key("statesSection"), color: Colors.blue),
-              label: 'Noticias',
+        body: TabBarView(
+          children: [
+            Obx(
+              () => (connectivityController.connected)
+                  ? HomeNews()
+                  : Center(
+                      child: Icon(Icons.wifi_off),
+                    ),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.group_outlined,
-                  key: Key("statelSection"), color: Colors.blue),
-              label: 'Estado',
+            Obx(
+              () => (connectivityController.connected)
+                  ? StateScreen()
+                  : Center(
+                      child: Icon(Icons.wifi_off),
+                    ),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.public_outlined,
-                  key: Key("publicationSection"), color: Colors.blue),
-              label: 'Publicación',
+            Obx(
+              () => (connectivityController.connected)
+                  ? PublicationPage()
+                  : Center(
+                      child: Icon(Icons.wifi_off),
+                    ),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.place_outlined,
-                  key: Key("locationSection"), color: Colors.blue),
-              label: 'Ubicación',
+            Obx(
+              () => (connectivityController.connected)
+                  ? Locations()
+                  : Center(
+                      child: Icon(Icons.wifi_off),
+                    ),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.chat_bubble_outline, color: Colors.blue),
-              label: 'Chat',
+            Obx(
+              () => (connectivityController.connected)
+                  ? UserMessages()
+                  : Center(
+                      child: Icon(Icons.wifi_off),
+                    ),
             ),
           ],
-          currentIndex: _selectedIndex,
-          onTap: _onItemTapped,
-          selectedItemColor: Colors.amber[800],
-        ));
+        ),
+      ),
+    );
   }
 }

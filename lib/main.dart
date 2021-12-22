@@ -7,6 +7,7 @@ import 'package:app_majpr_new/domain/services_domain/storage_services.dart';
 import 'package:app_majpr_new/domain/use_case/auth_management.dart';
 import 'package:app_majpr_new/domain/use_case/controller_use_case/authentication_controller.dart';
 import 'package:app_majpr_new/domain/use_case/controller_use_case/connectivity_controller.dart';
+import 'package:app_majpr_new/domain/use_case/controller_use_case/firestore.dart';
 import 'package:app_majpr_new/domain/use_case/controller_use_case/location_controller.dart';
 import 'package:app_majpr_new/domain/use_case/controller_use_case/notification_controller.dart';
 import 'package:app_majpr_new/domain/use_case/controller_use_case/permissions_controller.dart';
@@ -40,7 +41,7 @@ void main() async {
   final authController = Get.put(AuthenticationController());
   Get.put(StatusManager());
   Get.put(StateController());
-  Get.put(LocationController());
+  Get.put(ControllerUbicacion());
   Get.put(ThemeManager());
   Get.put(RealTimeChat());
   PermissionsController permissionsController =
@@ -53,8 +54,9 @@ void main() async {
     log("connection changed");
     connectivityController.connectivity = connectivityStatus;
   });
-
-  Get.put(LocationController());
+  Get.put(ControllerFirestore());
+  Get.put(AuthenticationController());
+  Get.put(ControllerUbicacion());
   // Notification controller
   NotificationController notificationController =
       Get.put(NotificationController());
@@ -87,7 +89,7 @@ void updatePositionInBackground() async {
       map: location.toJson,
     );
     log("updated location background"); //simpleTask will be emitted here.
-    print("updated location background"); //simpleTask will be emitted here.
+    //print("updated location background"); //simpleTask will be emitted here.
     return Future.value(true);
   });
 }

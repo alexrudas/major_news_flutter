@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 
 class CardMyPublication extends StatelessWidget {
-  final Widget? topLeftWidget, topRightWidget, content, extraContent;
-  final String title;
+  String date;
+  String title;
+  String message;
+  String userName;
+  Key? keyLisTitle;
 
   // AppCard constructor
-  const CardMyPublication(
+  CardMyPublication(
       {Key? key,
+      required this.date,
       required this.title,
-      this.content,
-      this.topLeftWidget,
-      this.topRightWidget,
-      this.extraContent})
+      required this.message,
+      required this.userName,
+      this.keyLisTitle})
       : super(
           key: key,
         );
@@ -27,42 +30,6 @@ class CardMyPublication extends StatelessWidget {
             top: 4.0, bottom: 16.0, left: 8.0, right: 8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Row(
-              children: [
-                topLeftWidget != null
-                    ? topLeftWidget!
-                    : const SizedBox(
-                        width: 48.0,
-                      ),
-                Expanded(
-                  child: Text(
-                    title,
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headline2,
-                  ),
-                ),
-                topRightWidget != null
-                    ? topRightWidget!
-                    : const SizedBox(
-                        width: 48.0,
-                      ),
-              ],
-            ),
-            const SizedBox(
-              height: 6.0,
-            ),
-            if (content != null)
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                child: content,
-              ),
-            if (extraContent != null)
-              Padding(
-                padding: const EdgeInsets.only(top: 18.0),
-                child: extraContent,
-              ),
-          ],
         ),
       ),
     );

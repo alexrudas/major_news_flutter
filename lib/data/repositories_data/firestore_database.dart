@@ -54,10 +54,12 @@ class FirestoreDatabase {
     // we also need to save the references of each of the documents,
     // so that, if necessary, we can apply actions on them in firestore later.
     for (var document in snapshot.docs) {
-      docs.add({
-        "ref": document.reference,
-        "data": document.data(),
-      });
+      if (document.data().isNotEmpty) {
+        docs.add({
+          "ref": document.reference,
+          "data": document.data(),
+        });
+      }
     }
     return docs;
   }
@@ -98,10 +100,12 @@ class FirestoreDatabase {
     // we also need to save the references of each of the documents,
     // so that, if necessary, we can apply actions on them in firestore later.
     for (var document in snapshot.docs) {
-      docs.add({
-        "ref": document.reference.path,
-        "data": document.data(),
-      });
+      if (document.data().isNotEmpty) {
+        docs.add({
+          "ref": document.reference,
+          "data": document.data(),
+        });
+      }
     }
     return docs;
   }

@@ -2,9 +2,9 @@ import 'package:app_majpr_new/domain/models/chat_model.dart';
 import 'package:app_majpr_new/domain/models/user_model.dart';
 import 'package:app_majpr_new/domain/use_case/controller_use_case/authentication_controller.dart';
 import 'package:app_majpr_new/domain/use_case/controller_use_case/chat_management.dart';
-import 'package:app_majpr_new/ui/pages/chat/chat_page.dart';
+import 'package:app_majpr_new/ui/pages/content/chats/user_chating_page.dart';
 import 'package:app_majpr_new/ui/pages/content/chats/widgets/chat_card.dart';
-import 'package:app_majpr_new/ui/pages/content/chats/widgets/select_user.dart';
+import 'package:app_majpr_new/ui/pages/content/chats/registred_user_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -50,14 +50,12 @@ class _State extends State<UserMessages> {
                   message: chat.lastMessage.message,
                   time: '',
                   onTap: () {
-                    print('${chat.userA}');
-                    print('${chat.userB}');
-                    // Get.to(
-                    //   () => ChatPage(
-                    //       chat: chat,
-                    //       localUser: chat.userA,
-                    //       remoteUser: chat.userB),
-                    // );
+                    // print('${chat.userA}');
+                    // print('${chat.userB}');
+                    Get.to(() => ChatPage(
+                        chat: chat,
+                        localUser: controller.userActive!,
+                        remoteUser: user));
                   },
                 );
               },
@@ -74,7 +72,7 @@ class _State extends State<UserMessages> {
         onPressed: () {
           Get.to(() => SelectUser());
         },
-        child: Icon(Icons.add_comment),
+        child: Icon(Icons.person_search_sharp),
       ),
     );
   }

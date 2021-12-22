@@ -2,7 +2,7 @@ import 'package:app_majpr_new/data/repositories_data/chat_repo_data/realtime_dat
 import 'package:app_majpr_new/domain/models/message.dart';
 import 'package:app_majpr_new/domain/models/user_model.dart';
 import 'package:app_majpr_new/domain/use_case/controller_use_case/authentication_controller.dart';
-import 'package:app_majpr_new/ui/pages/chat/chat_page.dart';
+import 'package:app_majpr_new/ui/pages/content/chats/user_chating_page.dart';
 import 'package:app_majpr_new/ui/pages/content/chats/widgets/chat_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,6 +33,7 @@ class _State extends State<SelectUser> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text("Usuarios Registrados")),
       body: FutureBuilder(
           future: getUser(),
           builder: (context, snapshot) {
